@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mello's Transportes — Fretes e Mudanças</title>
+<meta name="description" content="Mello's Transportes: mudanças, fretes, pintura, dedetização e montagem de móveis no Rio de Janeiro. Orçamento rápido pelo WhatsApp.">
+<style>
+  :root{
+    --navy:#16324F;
+    --navy-deep:#0E2238;
+    --cream:#FAF6EF;
+    --cream-card:#FFFFFF;
+    --orange:#E8702A;
+    --orange-deep:#C7551A;
+    --green:#2E7D5B;
+    --ink:#1B1F23;
+    --ink-soft:#5B6573;
+    --line:#E4DCCB;
+    --radius:14px;
+    --radius-sm:8px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;font-size:11px;}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    font-size:1rem;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  img{max-width:100%;display:block;}
+
+  /* ===== Header ===== */
+  header{
+    background:var(--navy-deep);
+    color:#fff;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  .header-inner{
+    max-width:1100px;
+    margin:0 auto;
+    padding:10px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .brand{display:flex;align-items:center;gap:8px;}
+  .brand-mark{
+    width:28px;height:28px;border-radius:7px;
+    background:linear-gradient(155deg,var(--orange),var(--orange-deep));
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px;flex-shrink:0;
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.1;}
+  .brand-text strong{font-family:'Space Grotesk',sans-serif;font-size:.85rem;}
+  .brand-text span{font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:#C9D6E2;}
+  .header-phone{
+    display:flex;align-items:center;gap:5px;
+    background:rgba(255,255,255,.08);
+    padding:6px 10px;border-radius:999px;
+    font-size:.72rem;font-weight:600;
+    white-space:nowrap;
+  }
+
+  /* ===== Hero / signature route (formato foto deitada 16:9) ===== */
+  .hero{
+    position:relative;
+    aspect-ratio:16/9;
+    max-height:300px;
+    min-height:200px;
+    overflow:hidden;
+    background:
+      linear-gradient(180deg, rgba(14,34,56,.35) 0%, rgba(14,34,56,.55) 55%, rgba(14,34,56,.92) 100%),
+      radial-gradient(circle at 75% 20%, #2C5380 0%, transparent 55%),
+      linear-gradient(135deg, #1A3A5C 0%, var(--navy-deep) 100%);
+    color:#fff;
+  }
+  .hero-photo-hint{
+    position:absolute;inset:0;
+    background-image:url('2.png');
+    background-size:cover;
+    background-position:center;
+  }
+  .hero-photo-hint::after{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(14,34,56,.35) 0%, rgba(14,34,56,.55) 55%, rgba(14,34,56,.92) 100%),
+      radial-gradient(circle at 75% 20%, rgba(44,83,128,.4) 0%, transparent 55%);
+  }
+  .hero-inner{
+    position:absolute;left:0;right:0;bottom:0;
+    max-width:1100px;margin:0 auto;
+    padding:10px 14px 12px;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:5px;
+    background:rgba(232,112,42,.22);
+    border:1px solid rgba(232,112,42,.45);
+    color:#FFD2AE;
+    font-size:.58rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+    padding:4px 9px;border-radius:999px;margin-bottom:6px;
+  }
+  .hero h1{
+    font-size:1.18rem;line-height:1.18;font-weight:700;max-width:22ch;
+  }
+  .hero h1 em{font-style:normal;color:var(--orange);}
+  .hero p.lead{margin-top:5px;color:#C9D6E2;font-size:.7rem;max-width:38ch;line-height:1.4;}
+
+  /* the route signature */
+  .route{
+    margin:10px 0 4px;
+    position:relative;
+    height:24px;
+    display:flex;align-items:center;
+  }
+  .route-line{
+    position:absolute;left:12px;right:12px;top:50%;
+    height:2px;
+    background-image:repeating-linear-gradient(to right,#8AA3BC 0,#8AA3BC 7px,transparent 7px,transparent 14px);
+  }
+  .route-pin{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--orange);box-shadow:0 0 0 3px rgba(232,112,42,.25);
+    z-index:2;
+  }
+  .route-pin.end{background:var(--green);box-shadow:0 0 0 3px rgba(46,125,91,.25);}
+  .route-truck{
+    position:absolute;top:50%;left:12px;
+    transform:translate(-50%,-50%);
+    font-size:.85rem;z-index:3;
+    animation:drive 3.6s ease-in-out infinite;
+  }
+  @keyframes drive{
+    0%{left:12px;}
+    50%{left:calc(100% - 12px);}
+    100%{left:12px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .route-truck{animation:none;left:50%;}
+  }
+  .route-labels{display:flex;justify-content:space-between;font-size:.56rem;color:#9FB4C8;margin-top:1px;}
+
+  .service-pills{display:none;}
+  .service-pills-bar{
+    background:var(--navy-deep);
+    padding:8px 14px 10px;
+    display:flex;flex-wrap:nowrap;gap:6px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .service-pills-bar::-webkit-scrollbar{display:none;}
+  .service-pill{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.18);
+    color:#fff;
+    font-size:.6rem;font-weight:600;
+    padding:6px 9px;border-radius:999px;
+    display:flex;align-items:center;gap:4px;
+    white-space:nowrap;flex-shrink:0;
+  }
+
+  /* ===== Sections generic ===== */
+  .section-band{
+    background:var(--orange);
+    color:#fff;
+    padding:12px 14px;
+    display:flex;align-items:center;gap:8px;
+    font-weight:700;font-size:.92rem;
+  }
+  .section-band.alt{background:var(--navy);}
+  .section-band .dot{
+    width:9px;height:9px;border-radius:50%;background:#fff;flex-shrink:0;
+  }
+  .card-section{
+    max-width:1100px;margin:0 auto;
+    background:var(--cream-card);
+    padding:18px 14px 22px;
+  }
+  label.field-label{
+    display:block;font-size:.68rem;font-weight:700;letter-spacing:.03em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px;
+  }
+  .field-row{margin-bottom:14px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{
+    width:100%;
+    border:1px solid var(--line);
+    background:#FBFAF6;
+    border-radius:var(--radius-sm);
+    padding:11px 12px;
+    font-size:.88rem;
+    color:var(--ink);
+    font-family:inherit;
+  }
+  textarea{resize:vertical;min-height:80px;}
+  select{appearance:none;background-image:linear-gradient(45deg,transparent 50%, var(--ink-soft) 50%),linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);background-position:calc(100% - 18px) calc(1em + 2px),calc(100% - 13px) calc(1em + 2px);background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
+
+  .radio-group{display:flex;flex-wrap:wrap;gap:8px;}
+  .radio-pill{
+    flex:1;min-width:130px;
+    border:1.5px solid var(--line);
+    border-radius:var(--radius-sm);
+    padding:11px 12px;
+    display:flex;align-items:center;gap:8px;
+    font-weight:600;font-size:.82rem;
+    background:#FBFAF6;
+  }
+  .radio-pill input{accent-color:var(--orange);width:16px;height:16px;flex-shrink:0;}
+  .radio-pill.checked{border-color:var(--orange);background:#FFF1E7;color:var(--orange-deep);}
+
+  .yn-group{display:flex;gap:8px;}
+  .yn-pill{
+    flex:1;border:1.5px solid var(--line);border-radius:var(--radius-sm);
+    padding:11px;text-align:center;font-weight:700;font-size:.82rem;background:#FBFAF6;
+  }
+  .yn-pill input{accent-color:var(--green);margin-right:5px;}
+  .yn-pill.checked{border-color:var(--green);background:#EAF6EF;color:var(--green);}
+
+  fieldset{border:none;padding:0;margin:0;}
+
+  .subbox{
+    background:#FFF6EC;border:1px solid #F2D9B8;border-radius:var(--radius);
+    padding:14px;margin-top:8px;
+  }
+  .subbox p.title{color:var(--orange-deep);font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:10px;}
+
+  /* Accordion */
+  .acc-item{border-bottom:1px solid var(--line);}
+  .acc-item:first-child{border-top:1px solid var(--line);}
+  .acc-head{
+    width:100%;background:none;border:none;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:13px 4px;font-weight:700;font-size:.88rem;color:var(--navy);
+  }
+  .acc-head .chev{transition:transform .2s ease;color:var(--ink-soft);}
+  .acc-item.open .acc-head .chev{transform:rotate(180deg);}
+  .acc-body{display:none;padding:0 4px 12px;}
+  .acc-item.open .acc-body{display:block;}
+  .item-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:9px 0;border-top:1px solid #EFEAE0;gap:10px;
+  }
+  .item-row:first-child{border-top:none;}
+  .item-thumb{
+    width:30px;height:30px;border-radius:8px;flex-shrink:0;
+    background:linear-gradient(155deg,#FFF1E2,#FCE3C4);
+    border:1px solid #F2D9B8;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.05rem;
+    overflow:hidden;
+  }
+  .item-thumb img{width:100%;height:100%;object-fit:cover;}
+  .item-name{font-size:.82rem;font-weight:600;flex:1;}
+  .item-name small{display:block;color:var(--ink-soft);font-weight:400;font-size:.68rem;}
+  .stepper{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .stepper button{
+    width:25px;height:25px;border-radius:50%;border:1.5px solid var(--line);
+    background:#fff;font-size:1rem;font-weight:700;color:var(--navy);
+    display:flex;align-items:center;justify-content:center;line-height:1;
+  }
+  .stepper span{min-width:16px;text-align:center;font-weight:700;font-size:.85rem;}
+
+  .volume-bar{
+    background:var(--navy-deep);color:#fff;border-radius:var(--radius);
+    padding:12px 14px;display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:12px;font-size:.85rem;
+  }
+  .volume-bar .label{font-size:.7rem;color:#A9BBCB;}
+  .volume-bar .value{
+    background:var(--orange);padding:7px 12px;border-radius:999px;font-weight:700;font-size:.82rem;
+  }
+
+  .extra-add{display:grid;grid-template-columns:1fr auto auto;gap:6px;margin-bottom:8px;}
+  .btn-add{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);padding:0 14px;font-weight:700;font-size:.82rem;}
+  .extra-list-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-top:1px solid #EFEAE0;font-size:.8rem;}
+  .extra-list-row button{background:none;border:none;color:#C0392B;font-weight:700;font-size:.74rem;}
+
+  .tip-box{
+    background:#EAF6EF;border:1px solid #BFE3CD;border-radius:var(--radius);
+    padding:14px;display:flex;gap:10px;align-items:flex-start;margin:16px 0;
+  }
+  .tip-box .ic{font-size:1.2rem;}
+  .tip-box strong{color:var(--green);display:block;margin-bottom:3px;font-size:.85rem;}
+  .tip-box p{margin:0;font-size:.78rem;color:var(--ink-soft);}
+
+  .cta-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:linear-gradient(120deg,#2E7D5B,#1E5E43);
+    color:#fff;font-weight:700;font-size:.92rem;
+    padding:15px;border-radius:999px;border:none;width:100%;
+    box-shadow:0 8px 20px rgba(46,125,91,.35);
+  }
+  .cta-sub{text-align:center;font-size:.7rem;color:var(--ink-soft);margin-top:8px;}
+
+  /* Reviews */
+  .reviews{max-width:1100px;margin:0 auto;padding:24px 14px 8px;}
+  .reviews .kicker{color:var(--orange-deep);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:.66rem;}
+  .reviews h2{font-size:1.2rem;margin-top:5px;margin-bottom:14px;color:var(--navy);}
+  .review-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:15px;margin-bottom:12px;
+  }
+  .review-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .avatar{
+    width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:.85rem;
+  }
+  .review-meta strong{display:block;font-size:.82rem;}
+  .review-meta span{font-size:.68rem;color:var(--ink-soft);}
+  .stars{color:#F2A53E;font-size:.78rem;margin:3px 0 6px;}
+  .review-card p{margin:0;font-size:.8rem;color:#3a3f45;font-style:italic;line-height:1.45;}
+
+  /* Footer */
+  footer{background:var(--navy-deep);color:#C9D6E2;padding:28px 14px 20px;text-align:center;}
+  footer h3{color:#fff;font-size:1.1rem;margin-bottom:5px;}
+  footer .tagline{font-size:.76rem;color:#9FB4C8;margin-bottom:14px;}
+  footer .info-line{font-size:.78rem;margin:5px 0;}
+  footer .info-line a{color:#FFD2AE;}
+  footer .copy{margin-top:16px;font-size:.62rem;color:#5C7896;letter-spacing:.03em;}
+  .badge-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:12px;}
+  .badge{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);font-size:.62rem;padding:5px 9px;border-radius:999px;}
+
+  @media (min-width:640px){
+    .hero h1{font-size:1.8rem;}
+    .header-phone{font-size:.78rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark"><img src="1.png" alt="Logo Mello's Transportes" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
+      <div class="brand-text">
+        <strong>Mello's Transportes</strong>
+        <span>Desde 2010 · RJ</span>
+      </div>
+    </div>
+    <a class="header-phone" href="tel:+5521969891491">📞 (21) 96989-1491</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-photo-hint"></div>
+  <div class="hero-inner">
+    <h1>Sua mudança, <em>no caminho certo.</em></h1>
+    <p class="lead">Mudanças residenciais, comerciais, interestaduais e fretes — com orçamento rápido pelo WhatsApp.</p>
+
+    <div class="route">
+      <div class="route-line"></div>
+      <div class="route-pin" style="position:absolute;left:12px;"></div>
+      <div class="route-pin end" style="position:absolute;right:12px;"></div>
+      <div class="route-truck">🚚</div>
+    </div>
+    <div class="route-labels"><span>ORIGEM</span><span>DESTINO</span></div>
+  </div>
+</section>
+<div class="service-pills-bar">
+  <div class="service-pill">🏠 Residencial</div>
+  <div class="service-pill">🏢 Comercial</div>
+  <div class="service-pill">🛣️ Interestadual</div>
+  <div class="service-pill">🚛 Frete Rápido</div>
+</div>
+
+<form id="quoteForm">
+
+  <!-- ===================== ROTA (mudança / frete) ===================== -->
+  <div id="rotaBlock">
+    <div class="section-band"><span class="dot" style="background:#FFD2AE"></span> Quero me mudar de:</div>
+    <div class="card-section">
+      <div class="two-col">
+        <div class="field-row">
+          <label class="field-label">Estado</label>
+          <select id="estadoOrigem"></select>
+        </div>
+        <div class="field-row">
+          <label class="field-label">Cidade</label>
+          <input type="text" placeholder="Ex: Rio de Janeiro" id="cidadeOrigem">
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="field-label">Bairro</label>
+        <input type="text" placeholder="Ex: Ramos" id="bairroOrigem">
+      </div>
+      <div class="two-col field-row">
+        <input type="text" placeholder="Ex: Rua Luis Câmara" id="ruaOrigem">
+        <input type="text" placeholder="Nº" id="numOrigem">
+      </div>
+      <div class="field-row">
+        <label class="field-label">Tipo de imóvel</label>
+        <div class="radio-group">
+          <label class="radio-pill"><input type="radio" name="imovelOrigem" value="Casa" checked> 🏠 Casa</label>
+          <label class="radio-pill"><input type="radio" name="imovelOrigem" value="Apartamento"> 🏢 Apartamento</label>
+        </div>
+      </div>
+      <div class="subbox" id="apOrigemBox" style="display:none;">
+        <p class="title">🏢 Informações do imóvel (origem)</p>
+        <div class="two-col">
+          <input type="text" placeholder="Ex: 3" id="andarOrigem">
+          <div class="yn-group">
+            <label class="yn-pill"><input type="radio" name="elevadorOrigem" value="Sim"> ✅ Elevador</label>
+            <label class="yn-pill"><input type="radio" name="elevadorOrigem" value="Não" checked> ❌ Sem elevador</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-band alt"><span class="dot"></span> Para:</div>
+    <div class="card-section">
+      <div class="two-col">
+        <div class="field-row">
+          <label class="field-label">Estado</label>
+          <select id="estadoDestino"></select>
+        </div>
+        <div class="field-row">
+          <label class="field-label">Cidade</label>
+          <input type="text" placeholder="Ex: Teresópolis" id="cidadeDestino">
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="field-label">Bairro</label>
+        <input type="text" placeholder="Ex: Centro" id="bairroDestino">
+      </div>
+      <div class="two-col field-row">
+        <input type="text" placeholder="Ex: Av. das Américas" id="ruaDestino">
+        <input type="text" placeholder="Nº" id="numDestino">
+      </div>
+      <div class="field-row">
+        <label class="field-label">Tipo de imóvel</label>
+        <div class="radio-group">
+          <label class="radio-pill"><input type="radio" name="imovelDestino" value="Casa" checked> 🏠 Casa</label>
+          <label class="radio-pill"><input type="radio" name="imovelDestino" value="Apartamento"> 🏢 Apartamento</label>
+        </div>
+      </div>
+      <div class="subbox" id="apDestinoBox" style="display:none;">
+        <p class="title">🏢 Informações do imóvel (destino)</p>
+        <div class="two-col">
+          <input type="text" placeholder="Ex: 5" id="andarDestino">
+          <div class="yn-group">
+            <label class="yn-pill"><input type="radio" name="elevadorDestino" value="Sim"> ✅ Elevador</label>
+            <label class="yn-pill"><input type="radio" name="elevadorDestino" value="Não" checked> ❌ Sem elevador</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-band"><span class="dot"></span> Tipo de serviço</div>
+    <div class="card-section">
+      <label class="field-label">O que você precisa?</label>
+      <div class="radio-group">
+        <label class="radio-pill"><input type="radio" name="servico" value="Mudança Residencial" checked> 🏠 Mudança Residencial</label>
+        <label class="radio-pill"><input type="radio" name="servico" value="Mudança Comercial"> 🏢 Mudança Comercial</label>
+        <label class="radio-pill"><input type="radio" name="servico" value="Mudança Interestadual"> 🛣️ Mudança Interestadual</label>
+        <label class="radio-pill"><input type="radio" name="servico" value="Frete Rápido"> 🚛 Frete Rápido</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== VOLUME (mudança / frete) ===================== -->
+  <div id="volumeBlock">
+    <div class="section-band alt"><span class="dot"></span> O que você vai levar?</div>
+    <div class="card-section">
+      <div class="volume-bar">
+        <span class="label">📐 Volume estimado</span>
+        <span class="value" id="volumeTotal">0,0 m³</span>
+      </div>
+      <div id="accordionWrap"></div>
+
+      <div class="field-row" style="margin-top:18px;">
+        <label class="field-label">✏️ Tem item que não apareceu acima?</label>
+        <div class="extra-add">
+          <input type="text" placeholder="Nome do item" id="extraName">
+          <input type="number" step="0.1" placeholder="m³" id="extraVol" style="width:80px;">
+          <button type="button" class="btn-add" id="extraAddBtn">+ Add</button>
+        </div>
+        <div id="extraList"></div>
+      </div>
+    </div>
+
+    <div class="section-band"><span class="dot"></span> Embalagem, desmontagem e montagem</div>
+    <div class="card-section">
+      <div class="field-row">
+        <label class="field-label">Precisa de desmontagem / montagem de móveis?</label>
+        <div class="yn-group">
+          <label class="yn-pill"><input type="radio" name="desmontagem" value="Sim" checked> ✅ Sim</label>
+          <label class="yn-pill"><input type="radio" name="desmontagem" value="Não"> ❌ Não</label>
+          <label class="yn-pill"><input type="radio" name="desmontagem" value="Não sei ainda"> 🤔 Não sei</label>
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="field-label">Precisa de embalagem dos itens?</label>
+        <div class="yn-group">
+          <label class="yn-pill"><input type="radio" name="embalagem" value="Sim" checked> ✅ Sim</label>
+          <label class="yn-pill"><input type="radio" name="embalagem" value="Não"> ❌ Não</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== DADOS ===================== -->
+  <div class="section-band alt"><span class="dot"></span> Seus dados</div>
+  <div class="card-section">
+    <div class="field-row">
+      <label class="field-label">Nome completo</label>
+      <input type="text" placeholder="Digite seu nome" id="nome" required>
+    </div>
+    <div class="field-row">
+      <label class="field-label">E-mail</label>
+      <input type="email" placeholder="seu@email.com" id="email">
+    </div>
+    <div class="field-row">
+      <label class="field-label">WhatsApp</label>
+      <div class="two-col">
+        <input type="tel" placeholder="DDD" id="ddd" maxlength="2">
+        <input type="tel" placeholder="Número" id="numero">
+      </div>
+    </div>
+    <div class="field-row">
+      <label class="field-label">Observações (opcional)</label>
+      <textarea placeholder="Itens frágeis, acesso difícil, condomínio, horário preferido..." id="obs"></textarea>
+    </div>
+
+    <div class="tip-box">
+      <div class="ic">📸</div>
+      <div><strong>Dica: envie fotos pelo WhatsApp!</strong><p>Depois de solicitar, mande fotos e vídeos pela conversa — isso agiliza muito o seu orçamento.</p></div>
+    </div>
+
+    <button type="submit" class="cta-btn">💬 Peça seu orçamento agora</button>
+    <p class="cta-sub">Direcionado ao WhatsApp da Mello's Transportes · (21) 96989-1491<br>Responde rapidamente</p>
+  </div>
+</form>
+
+<section class="reviews">
+  <div class="kicker">Avaliações de clientes</div>
+  <h2>O que dizem sobre a Mello's</h2>
+
+  <div class="review-card">
+    <div class="review-head">
+      <div class="avatar">D</div>
+      <div class="review-meta"><strong>Dayse B.</strong><span>Rio de Janeiro ▶ Teresópolis</span></div>
+    </div>
+    <div class="stars">★★★★★</div>
+    <p>"A equipe foi pontual e cuidou de cada móvel como se fosse próprio. Já indiquei pra toda a família."</p>
+  </div>
+
+  <div class="review-card">
+    <div class="review-head">
+      <div class="avatar">J</div>
+      <div class="review-meta"><strong>Juliana R.</strong><span>Engenho de Dentro ▶ Tijuca</span></div>
+    </div>
+    <div class="stars">★★★★★</div>
+    <p>"Atendimento organizado do começo ao fim. Pedi o orçamento pelo WhatsApp e em poucas horas já tinha resposta."</p>
+  </div>
+
+  <div class="review-card">
+    <div class="review-head">
+      <div class="avatar">M</div>
+      <div class="review-meta"><strong>Marcos A.</strong><span>Zona Sul ▶ Recreio</span></div>
+    </div>
+    <div class="stars">★★★★★</div>
+    <p>"Contratei a montagem dos móveis junto com a mudança e economizei um tempo enorme. Recomendo demais."</p>
+  </div>
+</section>
+
+<footer>
+  <h3>🚚 Mello's Transportes</h3>
+  <p class="tagline">Fretes e mudanças com cuidado em cada etapa — no preço justo, desde 2010.</p>
+  <p class="info-line">📍 Rua Luis Câmara, 393 — Ramos, Rio de Janeiro - RJ, 21031-260</p>
+  <p class="info-line">📞 <a href="tel:+5521969891491">(21) 96989-1491</a></p>
+  <p class="info-line">🌐 <a href="https://mellostransportes.com.br" target="_blank">mellostransportes.com.br</a></p>
+  <p class="info-line">🕒 Aberto · Fecha 17h</p>
+  <div class="badge-row">
+    <span class="badge">🏳️‍🌈 Empresa que acolhe a comunidade LGBT+</span>
+    <span class="badge">⭐ 4,8 · 167 avaliações</span>
+  </div>
+  <p class="copy">© 2026 MELLO'S TRANSPORTES — TODOS OS DIREITOS RESERVADOS</p>
+</footer>
+
+<script>
+/* ---------- estados ---------- */
+const estados = [
+  ["AC","Acre"],["AL","Alagoas"],["AP","Amapá"],["AM","Amazonas"],["BA","Bahia"],
+  ["CE","Ceará"],["DF","Distrito Federal"],["ES","Espírito Santo"],["GO","Goiás"],
+  ["MA","Maranhão"],["MT","Mato Grosso"],["MS","Mato Grosso do Sul"],["MG","Minas Gerais"],
+  ["PA","Pará"],["PB","Paraíba"],["PR","Paraná"],["PE","Pernambuco"],["PI","Piauí"],
+  ["RJ","Rio de Janeiro"],["RN","Rio Grande do Norte"],["RS","Rio Grande do Sul"],
+  ["RO","Rondônia"],["RR","Roraima"],["SC","Santa Catarina"],["SP","São Paulo"],
+  ["SE","Sergipe"],["TO","Tocantins"]
+];
+function fillEstados(sel, def){
+  sel.innerHTML = '<option value="">Selecione o estado</option>' +
+    estados.map(e=>`<option value="${e[1]} (${e[0]})" ${e[0]===def?'selected':''}>${e[1]} (${e[0]})</option>`).join('');
+}
+['estadoOrigem','estadoDestino'].forEach(id=>{
+  fillEstados(document.getElementById(id), 'RJ');
+});
+
+/* ---------- toggle apto origem/destino ---------- */
+function bindApto(radioName, boxId){
+  document.querySelectorAll(`input[name=${radioName}]`).forEach(r=>{
+    r.addEventListener('change', ()=>{
+      document.getElementById(boxId).style.display = r.value==='Apartamento' && r.checked ? 'block':'none';
+    });
+  });
+}
+bindApto('imovelOrigem','apOrigemBox');
+bindApto('imovelDestino','apDestinoBox');
+
+/* ---------- radio pill highlight ---------- */
+function highlightPills(container){
+  container.querySelectorAll('.radio-pill, .yn-pill').forEach(p=>{
+    const input = p.querySelector('input');
+    function refresh(){ p.classList.toggle('checked', input.checked); }
+    input.addEventListener('change', ()=>{
+      container.querySelectorAll('input[name='+input.name+']').forEach(i=>{
+        i.closest('.radio-pill,.yn-pill').classList.toggle('checked', i.checked);
+      });
+    });
+    refresh();
+  });
+}
+document.querySelectorAll('.card-section, #serviceGroup').forEach(c=>highlightPills(c));
+
+/* ---------- volume accordion data ---------- */
+const categorias = [
+  { nome:"Sala de Estar", icon:"🛋️", itens:[
+    ["Sofá 2 Lugares",1.0,"🛋️"],["Sofá 3 Lugares",1.5,"🛋️"],["Sofá 4 Lugares",2.0,"🛋️"],["Sofá em L",2.5,"🛋️"],
+    ["Poltrona",0.6,"🪑"],["Mesa de Centro",0.3,"🟫"],["Estante Grande",2.0,"🗄️"],["Estante Pequena",0.6,"🗄️"],
+    ["Rack",0.8,"📺"],["Aparador",0.5,"🪑"],["Buffet",1.2,"🍽️"],["Cristaleira",0.8,"🍷"],
+    ["TV 32-43 pol",0.5,"📺"],["TV 55-65 pol",1.2,"📺"],["Tapete Grande",0.5,"🧶"]
+  ]},
+  { nome:"Quartos", icon:"🛏️", itens:[
+    ["Cama Casal",1.8,"🛏️"],["Cama Queen",2.0,"🛏️"],["Cama King",2.2,"🛏️"],["Cama Solteiro",1.1,"🛏️"],
+    ["Cama Beliche",1.2,"🛏️"],["Berço",0.3,"👶"],["Colchão Casal",0.8,"🛌"],["Colchão Solteiro",0.4,"🛌"],
+    ["Guarda-Roupa 2 Portas",1.0,"🚪"],["Guarda-Roupa 4 Portas",2.0,"🚪"],["Guarda-Roupa 6 Portas",2.5,"🚪"],
+    ["Cômoda",0.6,"🗄️"],["Criado-Mudo",0.2,"🛋️"],["Penteadeira",0.5,"🪞"],["Sofá-Cama",1.2,"🛋️"]
+  ]},
+  { nome:"Cozinha e Área de Serviço", icon:"🍽️", itens:[
+    ["Geladeira Simples",1.0,"❄️"],["Geladeira Duplex",1.2,"❄️"],["Freezer",1.0,"🧊"],["Frigobar",0.5,"🧊"],
+    ["Fogão",0.7,"🔥"],["Máq. de Lavar",0.7,"🧺"],["Secadora",0.6,"🌀"],["Lava-Louças",0.4,"🍽️"],
+    ["Microondas",0.2,"📻"],["Mesa 4 Lugares",0.8,"🍽️"],["Mesa 6 Lugares",1.0,"🍽️"],["Cadeira",0.2,"🪑"],
+    ["Balcão 1m",1.0,"🗄️"],["Ar Condicionado",0.3,"❄️"]
+  ]},
+  { nome:"Escritório", icon:"💼", itens:[
+    ["Mesa de Escritório",0.6,"🖥️"],["Escrivaninha Grande",1.3,"🖥️"],["Cadeira de Escritório",0.4,"🪑"],
+    ["Estante de Livros",0.5,"📚"],["Arquivo",0.5,"🗄️"],["Armário de Aço",0.6,"🗄️"],
+    ["Impressora",0.1,"🖨️"],["Cofre",1.0,"🔒"]
+  ]},
+  { nome:"Caixas e Volumes", icon:"📦", itens:[
+    ["Caixas Pequenas",0.05,"📦"],["Caixas Médias",0.08,"📦"],["Caixas Grandes",0.12,"📦"],
+    ["Sacolas",0.02,"🛍️"],["Malas de Viagem",0.08,"🧳"],["Bags / Bolsões",0.10,"👜"],
+    ["Itens com Embrulho",0.05,"🖼️"]
+  ]}
+];
+
+const wrap = document.getElementById('accordionWrap');
+let counts = {};
+let imgCounter = 3; /* 1.png=logo, 2.png=banner, itens começam em 3.png */
+categorias.forEach((cat, ci)=>{
+  const semFoto = cat.nome === "Caixas e Volumes";
+  const item = document.createElement('div');
+  item.className = 'acc-item' + (ci===0?' open':'');
+  item.innerHTML = `
+    <button type="button" class="acc-head">
+      <span>${cat.icon} ${cat.nome}</span><span class="chev">▾</span>
+    </button>
+    <div class="acc-body">
+      ${cat.itens.map((it,ii)=>{
+        const key = `${ci}_${ii}`;
+        counts[key]=0;
+        const thumb = semFoto
+          ? it[2]
+          : `<img src="${imgCounter++}.png" alt="${it[0]}" onerror="this.parentElement.innerHTML='${it[2]}'">`;
+        return `<div class="item-row">
+          <div class="item-thumb">${thumb}</div>
+          <div class="item-name">${it[0]}<small>${it[1]} m³/un</small></div>
+          <div class="stepper">
+            <button type="button" data-key="${key}" data-d="-1">−</button>
+            <span id="count_${key}">0</span>
+            <button type="button" data-key="${key}" data-vol="${it[1]}" data-d="1">+</button>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  wrap.appendChild(item);
+
+  item.querySelector('.acc-head').addEventListener('click', ()=>{
+    item.classList.toggle('open');
+  });
+});
+
+let extras = [];
+function recalcVolume(){
+  let total = 0;
+  wrap.querySelectorAll('.stepper button[data-vol]').forEach(b=>{
+    const key = b.dataset.key;
+    total += counts[key] * parseFloat(b.dataset.vol);
+  });
+  extras.forEach(e=> total += e.vol * e.qty);
+  document.getElementById('volumeTotal').textContent = total.toFixed(1).replace('.',',') + ' m³';
+}
+
+wrap.addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-key]');
+  if(!btn) return;
+  const key = btn.dataset.key;
+  const d = parseInt(btn.dataset.d);
+  counts[key] = Math.max(0, (counts[key]||0) + d);
+  document.getElementById('count_'+key).textContent = counts[key];
+  recalcVolume();
+});
+
+/* extras */
+const extraList = document.getElementById('extraList');
+document.getElementById('extraAddBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('extraName').value.trim();
+  const vol = parseFloat(document.getElementById('extraVol').value) || 0;
+  if(!name) return;
+  extras.push({name, vol, qty:1});
+  renderExtras();
+  document.getElementById('extraName').value='';
+  document.getElementById('extraVol').value='';
+  recalcVolume();
+});
+function renderExtras(){
+  extraList.innerHTML = extras.map((e,i)=>`
+    <div class="extra-list-row">
+      <span>${e.name} — ${e.vol} m³</span>
+      <button type="button" data-i="${i}">remover</button>
+    </div>`).join('');
+  extraList.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      extras.splice(parseInt(b.dataset.i),1);
+      renderExtras();
+      recalcVolume();
+    });
+  });
+}
+
+/* ---------- submit -> WhatsApp ---------- */
+document.getElementById('quoteForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const val = id => document.getElementById(id)?.value || '';
+  const servico = document.querySelector('input[name=servico]:checked').value;
+
+  let msg = `Olá! Vim pelo site e gostaria de um orçamento.\n\n*Serviço:* ${servico}\n`;
+
+  msg += `\n*Origem:* ${val('ruaOrigem')}, ${val('numOrigem')} — ${val('bairroOrigem')}, ${val('cidadeOrigem')} - ${val('estadoOrigem')}\n`;
+  msg += `Imóvel: ${document.querySelector('input[name=imovelOrigem]:checked').value}`;
+  if(document.querySelector('input[name=imovelOrigem]:checked').value==='Apartamento'){
+    msg += ` (andar ${val('andarOrigem')}, elevador: ${document.querySelector('input[name=elevadorOrigem]:checked')?.value||'-'})`;
+  }
+  msg += `\n\n*Destino:* ${val('ruaDestino')}, ${val('numDestino')} — ${val('bairroDestino')}, ${val('cidadeDestino')} - ${val('estadoDestino')}\n`;
+  msg += `Imóvel: ${document.querySelector('input[name=imovelDestino]:checked').value}`;
+  if(document.querySelector('input[name=imovelDestino]:checked').value==='Apartamento'){
+    msg += ` (andar ${val('andarDestino')}, elevador: ${document.querySelector('input[name=elevadorDestino]:checked')?.value||'-'})`;
+  }
+
+  msg += `\n\n*Volume estimado:* ${document.getElementById('volumeTotal').textContent}\n*Itens:*\n`;
+  categorias.forEach((cat,ci)=>{
+    let linha = [];
+    cat.itens.forEach((it,ii)=>{
+      const key = `${ci}_${ii}`;
+      if(counts[key] > 0) linha.push(`${it[0]} x${counts[key]}`);
+    });
+    if(linha.length) msg += `- ${cat.nome}: ${linha.join(', ')}\n`;
+  });
+  if(extras.length) msg += `- Outros: ${extras.map(e=>e.name+' x'+e.qty).join(', ')}\n`;
+
+  msg += `\n*Desmontagem/Montagem:* ${document.querySelector('input[name=desmontagem]:checked')?.value||'-'}`;
+  msg += `\n*Embalagem:* ${document.querySelector('input[name=embalagem]:checked')?.value||'-'}\n`;
+
+  msg += `\n*Nome:* ${val('nome')}\n*E-mail:* ${val('email')}\n*WhatsApp:* (${val('ddd')}) ${val('numero')}`;
+  if(val('obs')) msg += `\n*Observações:* ${val('obs')}`;
+
+  const url = `https://wa.me/5521969891491?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+});
+
+recalcVolume();
+</script>
+</body>
+</html>
