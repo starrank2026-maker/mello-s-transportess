@@ -21,7 +21,7 @@
     --radius-sm:8px;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;font-size:11px;}
+  html{scroll-behavior:smooth;font-size:10px;overflow-x:hidden;}
   body{
     margin:0;
     font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
@@ -29,6 +29,8 @@
     color:var(--ink);
     -webkit-font-smoothing:antialiased;
     font-size:1rem;
+    overflow-x:hidden;
+    max-width:100vw;
   }
   h1,h2,h3,.display{
     font-family:'Space Grotesk',system-ui,sans-serif;
@@ -59,7 +61,7 @@
   }
   .brand{display:flex;align-items:center;gap:8px;}
   .brand-mark{
-    width:28px;height:28px;border-radius:7px;
+    width:34px;height:34px;border-radius:8px;
     background:linear-gradient(155deg,var(--orange),var(--orange-deep));
     display:flex;align-items:center;justify-content:center;
     font-size:16px;flex-shrink:0;
@@ -73,6 +75,13 @@
     padding:6px 10px;border-radius:999px;
     font-size:.72rem;font-weight:600;
     white-space:nowrap;
+  }
+  .header-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .header-ig{
+    width:32px;height:32px;border-radius:50%;
+    background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;font-size:1rem;
   }
 
   /* ===== Hero / signature route (formato foto deitada 16:9) ===== */
@@ -177,9 +186,9 @@
   .section-band{
     background:var(--orange);
     color:#fff;
-    padding:12px 14px;
-    display:flex;align-items:center;gap:8px;
-    font-weight:700;font-size:.92rem;
+    padding:15px 18px;
+    display:flex;align-items:center;gap:9px;
+    font-weight:700;font-size:.96rem;
   }
   .section-band.alt{background:var(--navy);}
   .section-band .dot{
@@ -188,44 +197,44 @@
   .card-section{
     max-width:1100px;margin:0 auto;
     background:var(--cream-card);
-    padding:18px 14px 22px;
+    padding:24px 18px 28px;
   }
   label.field-label{
-    display:block;font-size:.68rem;font-weight:700;letter-spacing:.03em;
-    text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px;
+    display:block;font-size:.72rem;font-weight:700;letter-spacing:.03em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px;
   }
-  .field-row{margin-bottom:14px;}
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-  input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{
+  .field-row{margin-bottom:20px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  input[type=text],input[type=tel],input[type=email],input[type=number],input[type=date],select,textarea{
     width:100%;
     border:1px solid var(--line);
     background:#FBFAF6;
     border-radius:var(--radius-sm);
-    padding:11px 12px;
-    font-size:.88rem;
+    padding:14px 14px;
+    font-size:.92rem;
     color:var(--ink);
     font-family:inherit;
   }
-  textarea{resize:vertical;min-height:80px;}
+  textarea{resize:vertical;min-height:90px;}
   select{appearance:none;background-image:linear-gradient(45deg,transparent 50%, var(--ink-soft) 50%),linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);background-position:calc(100% - 18px) calc(1em + 2px),calc(100% - 13px) calc(1em + 2px);background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
 
-  .radio-group{display:flex;flex-wrap:wrap;gap:8px;}
+  .radio-group{display:flex;flex-wrap:wrap;gap:10px;}
   .radio-pill{
-    flex:1;min-width:130px;
+    flex:1;min-width:140px;
     border:1.5px solid var(--line);
     border-radius:var(--radius-sm);
-    padding:11px 12px;
-    display:flex;align-items:center;gap:8px;
-    font-weight:600;font-size:.82rem;
+    padding:14px 14px;
+    display:flex;align-items:center;gap:9px;
+    font-weight:600;font-size:.88rem;
     background:#FBFAF6;
   }
-  .radio-pill input{accent-color:var(--orange);width:16px;height:16px;flex-shrink:0;}
+  .radio-pill input{accent-color:var(--orange);width:17px;height:17px;flex-shrink:0;}
   .radio-pill.checked{border-color:var(--orange);background:#FFF1E7;color:var(--orange-deep);}
 
-  .yn-group{display:flex;gap:8px;}
+  .yn-group{display:flex;gap:10px;}
   .yn-pill{
     flex:1;border:1.5px solid var(--line);border-radius:var(--radius-sm);
-    padding:11px;text-align:center;font-weight:700;font-size:.82rem;background:#FBFAF6;
+    padding:14px;text-align:center;font-weight:700;font-size:.88rem;background:#FBFAF6;
   }
   .yn-pill input{accent-color:var(--green);margin-right:5px;}
   .yn-pill.checked{border-color:var(--green);background:#EAF6EF;color:var(--green);}
@@ -244,19 +253,19 @@
   .acc-head{
     width:100%;background:none;border:none;
     display:flex;align-items:center;justify-content:space-between;
-    padding:13px 4px;font-weight:700;font-size:.88rem;color:var(--navy);
+    padding:16px 4px;font-weight:700;font-size:.92rem;color:var(--navy);
   }
   .acc-head .chev{transition:transform .2s ease;color:var(--ink-soft);}
   .acc-item.open .acc-head .chev{transform:rotate(180deg);}
-  .acc-body{display:none;padding:0 4px 12px;}
+  .acc-body{display:none;padding:0 4px 14px;}
   .acc-item.open .acc-body{display:block;}
   .item-row{
     display:flex;align-items:center;justify-content:space-between;
-    padding:9px 0;border-top:1px solid #EFEAE0;gap:10px;
+    padding:12px 0;border-top:1px solid #EFEAE0;gap:10px;
   }
   .item-row:first-child{border-top:none;}
   .item-thumb{
-    width:30px;height:30px;border-radius:8px;flex-shrink:0;
+    width:36px;height:36px;border-radius:9px;flex-shrink:0;
     background:linear-gradient(155deg,#FFF1E2,#FCE3C4);
     border:1px solid #F2D9B8;
     display:flex;align-items:center;justify-content:center;
@@ -268,7 +277,7 @@
   .item-name small{display:block;color:var(--ink-soft);font-weight:400;font-size:.68rem;}
   .stepper{display:flex;align-items:center;gap:8px;flex-shrink:0;}
   .stepper button{
-    width:25px;height:25px;border-radius:50%;border:1.5px solid var(--line);
+    width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);
     background:#fff;font-size:1rem;font-weight:700;color:var(--navy);
     display:flex;align-items:center;justify-content:center;line-height:1;
   }
@@ -316,7 +325,7 @@
   }
   .review-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
   .avatar{
-    width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;
+    width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;
     display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:.85rem;
   }
   .review-meta strong{display:block;font-size:.82rem;}
@@ -338,6 +347,31 @@
     .hero h1{font-size:1.8rem;}
     .header-phone{font-size:.78rem;}
   }
+
+  /* ===== Floating button (Instagram only) ===== */
+  .float-btns{
+    position:fixed;
+    right:16px;
+    bottom:18px;
+    z-index:60;
+    max-width:52px;
+  }
+  .float-btn{
+    width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;
+    box-shadow:0 6px 16px rgba(0,0,0,.25);
+    color:#fff;
+    transition:transform .15s ease;
+    cursor:pointer;
+  }
+  .float-btn:hover{transform:scale(1.06);}
+  .float-btn:active{transform:scale(0.92);}
+  .float-btn.ig{
+    background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+    overflow:hidden;
+  }
+  .float-btn img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
 </style>
 </head>
 <body>
@@ -351,7 +385,10 @@
         <span>Desde 2010 · RJ</span>
       </div>
     </div>
-    <a class="header-phone" href="tel:+5521969891491">📞 (21) 96989-1491</a>
+    <div class="header-actions">
+      <a class="header-ig" href="https://www.instagram.com/mellostransportes?utm_source=qr&igsh=MXZmM2ZhM2hidHRocg==" target="_blank" rel="noopener" aria-label="Instagram Mello's Transportes">📷</a>
+      <a class="header-phone" href="tel:+5521969891491">📞 (21) 96989-1491</a>
+    </div>
   </div>
 </header>
 
@@ -381,6 +418,23 @@
 
   <!-- ===================== ROTA (mudança / frete) ===================== -->
   <div id="rotaBlock">
+    <div class="section-band"><span class="dot"></span> Data da mudança</div>
+    <div class="card-section">
+      <div class="two-col">
+        <div class="field-row">
+          <label class="field-label">📅 Data desejada</label>
+          <input type="date" id="dataMudanca">
+        </div>
+        <div class="field-row">
+          <label class="field-label">A data é flexível?</label>
+          <div class="yn-group">
+            <label class="yn-pill"><input type="radio" name="dataFlexivel" value="Sim" checked> ✅ Sim</label>
+            <label class="yn-pill"><input type="radio" name="dataFlexivel" value="Não"> ❌ Não</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="section-band"><span class="dot" style="background:#FFD2AE"></span> Quero me mudar de:</div>
     <div class="card-section">
       <div class="two-col">
@@ -408,15 +462,24 @@
           <label class="radio-pill"><input type="radio" name="imovelOrigem" value="Apartamento"> 🏢 Apartamento</label>
         </div>
       </div>
-      <div class="subbox" id="apOrigemBox" style="display:none;">
-        <p class="title">🏢 Informações do imóvel (origem)</p>
-        <div class="two-col">
-          <input type="text" placeholder="Ex: 3" id="andarOrigem">
-          <div class="yn-group">
-            <label class="yn-pill"><input type="radio" name="elevadorOrigem" value="Sim"> ✅ Elevador</label>
-            <label class="yn-pill"><input type="radio" name="elevadorOrigem" value="Não" checked> ❌ Sem elevador</label>
+      <div class="subbox" id="apOrigemBox">
+        <p class="title" id="apOrigemTitle">🏠 Acesso ao imóvel (origem)</p>
+        <div class="field-row" style="margin-bottom:0;">
+          <label class="field-label">Como é o acesso?</label>
+          <div class="radio-group">
+            <label class="radio-pill"><input type="radio" name="acessoOrigem" value="Sem escada e sem elevador" checked> 🚶 Sem escada / sem elevador</label>
+            <label class="radio-pill"><input type="radio" name="acessoOrigem" value="Com escada"> 🪜 Tem escada</label>
+            <label class="radio-pill"><input type="radio" name="acessoOrigem" value="Com elevador"> 🛗 Tem elevador</label>
           </div>
         </div>
+        <div class="field-row" style="margin-top:12px;margin-bottom:0;display:none;" id="andarOrigemRow">
+          <label class="field-label">Qual andar?</label>
+          <input type="text" placeholder="Ex: 3" id="andarOrigem">
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:14px;">
+        <label class="field-label">🏘️ Condomínio (opcional)</label>
+        <input type="text" placeholder="Nome do condomínio, bloco, portaria..." id="condominioOrigem">
       </div>
     </div>
 
@@ -447,15 +510,24 @@
           <label class="radio-pill"><input type="radio" name="imovelDestino" value="Apartamento"> 🏢 Apartamento</label>
         </div>
       </div>
-      <div class="subbox" id="apDestinoBox" style="display:none;">
-        <p class="title">🏢 Informações do imóvel (destino)</p>
-        <div class="two-col">
-          <input type="text" placeholder="Ex: 5" id="andarDestino">
-          <div class="yn-group">
-            <label class="yn-pill"><input type="radio" name="elevadorDestino" value="Sim"> ✅ Elevador</label>
-            <label class="yn-pill"><input type="radio" name="elevadorDestino" value="Não" checked> ❌ Sem elevador</label>
+      <div class="subbox" id="apDestinoBox">
+        <p class="title" id="apDestinoTitle">🏠 Acesso ao imóvel (destino)</p>
+        <div class="field-row" style="margin-bottom:0;">
+          <label class="field-label">Como é o acesso?</label>
+          <div class="radio-group">
+            <label class="radio-pill"><input type="radio" name="acessoDestino" value="Sem escada e sem elevador" checked> 🚶 Sem escada / sem elevador</label>
+            <label class="radio-pill"><input type="radio" name="acessoDestino" value="Com escada"> 🪜 Tem escada</label>
+            <label class="radio-pill"><input type="radio" name="acessoDestino" value="Com elevador"> 🛗 Tem elevador</label>
           </div>
         </div>
+        <div class="field-row" style="margin-top:12px;margin-bottom:0;display:none;" id="andarDestinoRow">
+          <label class="field-label">Qual andar?</label>
+          <input type="text" placeholder="Ex: 5" id="andarDestino">
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:14px;">
+        <label class="field-label">🏘️ Condomínio (opcional)</label>
+        <input type="text" placeholder="Nome do condomínio, bloco, portaria..." id="condominioDestino">
       </div>
     </div>
 
@@ -503,10 +575,41 @@
         </div>
       </div>
       <div class="field-row">
+        <label class="field-label">Quais itens precisam ser desmontados?</label>
+        <textarea placeholder="Ex: Guarda-roupa 6 portas, cama box casal, escrivaninha..." id="itensDesmontar" style="min-height:70px;"></textarea>
+      </div>
+      <div class="field-row">
         <label class="field-label">Precisa de embalagem dos itens?</label>
         <div class="yn-group">
           <label class="yn-pill"><input type="radio" name="embalagem" value="Sim" checked> ✅ Sim</label>
           <label class="yn-pill"><input type="radio" name="embalagem" value="Não"> ❌ Não</label>
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="field-label">Quais itens precisam de embalagem?</label>
+        <textarea placeholder="Ex: TV 55pol, espelhos, quadros, itens frágeis..." id="itensEmbalar" style="min-height:70px;"></textarea>
+      </div>
+    </div>
+
+    <div class="section-band"><span class="dot"></span> Forma de pagamento</div>
+    <div class="card-section">
+      <div class="field-row">
+        <label class="field-label">Como prefere pagar?</label>
+        <div class="radio-group">
+          <label class="radio-pill"><input type="radio" name="pagamento" value="Pix" checked> 💸 Pix</label>
+          <label class="radio-pill"><input type="radio" name="pagamento" value="Dinheiro"> 💵 Dinheiro</label>
+          <label class="radio-pill"><input type="radio" name="pagamento" value="Cartão"> 💳 Cartão</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVISO 10% -->
+    <div style="margin:0;padding:16px 18px;background:#FFF8E1;border-top:4px solid #F59E0B;border-bottom:4px solid #F59E0B;">
+      <div style="max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:12px;">
+        <span style="font-size:1.6rem;flex-shrink:0;">📋</span>
+        <div>
+          <strong style="display:block;font-size:.92rem;color:#92400E;margin-bottom:4px;">⚠️ AGENDAMENTO — SINAL DE 10%</strong>
+          <p style="margin:0;font-size:.82rem;color:#78350F;line-height:1.5;">Para confirmar e agendar a sua mudança ou frete, é necessário o pagamento de <strong>10% do valor total como sinal</strong>. Esse valor é descontado no pagamento final e garante a reserva da data com a nossa equipe.</p>
         </div>
       </div>
     </div>
@@ -583,6 +686,7 @@
   <p class="info-line">📍 Rua Luis Câmara, 393 — Ramos, Rio de Janeiro - RJ, 21031-260</p>
   <p class="info-line">📞 <a href="tel:+5521969891491">(21) 96989-1491</a></p>
   <p class="info-line">🌐 <a href="https://mellostransportes.com.br" target="_blank">mellostransportes.com.br</a></p>
+  <p class="info-line">📷 <a href="https://www.instagram.com/mellostransportes?utm_source=qr&igsh=MXZmM2ZhM2hidHRocg==" target="_blank" rel="noopener">@mellostransportes</a></p>
   <p class="info-line">🕒 Aberto · Fecha 17h</p>
   <div class="badge-row">
     <span class="badge">🏳️‍🌈 Empresa que acolhe a comunidade LGBT+</span>
@@ -590,6 +694,12 @@
   </div>
   <p class="copy">© 2026 MELLO'S TRANSPORTES — TODOS OS DIREITOS RESERVADOS</p>
 </footer>
+
+<div class="float-btns">
+  <a class="float-btn ig" href="https://www.instagram.com/mellostransportes?utm_source=qr&igsh=MXZmM2ZhM2hidHRocg==" target="_blank" rel="noopener" aria-label="Abrir Instagram da Mello's Transportes">
+    <img src="65.png" alt="Instagram Mello's Transportes" onerror="this.parentElement.innerHTML='📷'">
+  </a>
+</div>
 
 <script>
 /* ---------- estados ---------- */
@@ -610,16 +720,24 @@ function fillEstados(sel, def){
   fillEstados(document.getElementById(id), 'RJ');
 });
 
-/* ---------- toggle apto origem/destino ---------- */
-function bindApto(radioName, boxId){
-  document.querySelectorAll(`input[name=${radioName}]`).forEach(r=>{
-    r.addEventListener('change', ()=>{
-      document.getElementById(boxId).style.display = r.value==='Apartamento' && r.checked ? 'block':'none';
-    });
-  });
+/* ---------- toggle acesso origem/destino ---------- */
+function bindAcesso(tipoName, radioName, titleEl, andarRow){
+  const imovelRadios = document.querySelectorAll(`input[name=${tipoName}]`);
+  const title = document.getElementById(titleEl);
+  const andar = document.getElementById(andarRow);
+
+  function updateAcesso(){
+    const tipo = document.querySelector(`input[name=${tipoName}]:checked`)?.value;
+    const isApto = tipo === 'Apartamento';
+    title.textContent = isApto ? '🏢 Acesso ao imóvel' : '🏠 Acesso ao imóvel';
+    andar.style.display = isApto ? 'block' : 'none';
+  }
+
+  imovelRadios.forEach(r => r.addEventListener('change', updateAcesso));
+  updateAcesso();
 }
-bindApto('imovelOrigem','apOrigemBox');
-bindApto('imovelDestino','apDestinoBox');
+bindAcesso('imovelOrigem','acessoOrigem','apOrigemTitle','andarOrigemRow');
+bindAcesso('imovelDestino','acessoDestino','apDestinoTitle','andarDestinoRow');
 
 /* ---------- radio pill highlight ---------- */
 function highlightPills(container){
@@ -634,45 +752,63 @@ function highlightPills(container){
     refresh();
   });
 }
-document.querySelectorAll('.card-section, #serviceGroup').forEach(c=>highlightPills(c));
+document.querySelectorAll('.card-section').forEach(c=>highlightPills(c));
 
-/* ---------- volume accordion data ---------- */
+/* ---------- volume accordion data ----------
+   Cada item tem um NÚMERO FIXO de imagem (4º valor do array).
+   Isso significa: não importa a ordem dos itens na lista, a foto
+   certa sempre vai pro item certo. Pra trocar uma foto de lugar,
+   só mude o número — não precisa reordenar nada.
+
+   ⚠️ REVISAR: 60.png foi sinalizado como sendo uma foto de cama,
+   mas estava reservado pra "Estante de Livros". Aguardando você
+   confirmar qual item de cama é o 60 e pra onde vai a foto da
+   Estante de Livros.
+*/
 const categorias = [
   { nome:"Sala de Estar", icon:"🛋️", itens:[
-    ["Sofá 2 Lugares",1.0,"🛋️"],["Sofá 3 Lugares",1.5,"🛋️"],["Sofá 4 Lugares",2.0,"🛋️"],["Sofá em L",2.5,"🛋️"],
-    ["Poltrona",0.6,"🪑"],["Mesa de Centro",0.3,"🟫"],["Estante Grande",2.0,"🗄️"],["Estante Pequena",0.6,"🗄️"],
-    ["Rack",0.8,"📺"],["Aparador",0.5,"🪑"],["Buffet",1.2,"🍽️"],["Cristaleira",0.8,"🍷"],
-    ["TV 32-43 pol",0.5,"📺"],["TV 55-65 pol",1.2,"📺"],["Tapete Grande",0.5,"🧶"]
+    ["Sofá 2 Lugares",1.0,"🛋️",3],["Sofá 3 Lugares",1.5,"🛋️",4],["Sofá 4 Lugares",2.0,"🛋️",5],["Sofá em L",2.5,"🛋️",6],
+    ["Poltrona",0.6,"🪑",7],["Mesa de Centro",0.3,"🟫",8],
+    ["Estante Grande",2.0,"🗄️",9],["Estante Pequena",0.6,"🗄️",10],["Rack",0.8,"📺",11],
+    ["Aparador",0.5,"🪑",12],["Buffet",1.2,"🍽️",13],["Cristaleira",0.8,"🍷",14],
+    ["TV 32-43 pol",0.5,"📺",15],["TV 55-65 pol",1.2,"📺",16],["Tapete Grande",0.5,"🧶",17],
+    ["Cadeira do Papai (Reclinável)",0.8,"🪑",18],["Espelho Grande",0.4,"🪞",19],
+    ["Quadro / Painel",0.1,"🖼️",20],["Iluminária de Piso",0.2,"💡",21],["Ventilador de Pé",0.2,"🌀",22]
   ]},
   { nome:"Quartos", icon:"🛏️", itens:[
-    ["Cama Casal",1.8,"🛏️"],["Cama Queen",2.0,"🛏️"],["Cama King",2.2,"🛏️"],["Cama Solteiro",1.1,"🛏️"],
-    ["Cama Beliche",1.2,"🛏️"],["Berço",0.3,"👶"],["Colchão Casal",0.8,"🛌"],["Colchão Solteiro",0.4,"🛌"],
-    ["Guarda-Roupa 2 Portas",1.0,"🚪"],["Guarda-Roupa 4 Portas",2.0,"🚪"],["Guarda-Roupa 6 Portas",2.5,"🚪"],
-    ["Cômoda",0.6,"🗄️"],["Criado-Mudo",0.2,"🛋️"],["Penteadeira",0.5,"🪞"],["Sofá-Cama",1.2,"🛋️"]
+    ["Cama Casal",1.8,"🛏️",23],["Cama Queen",2.0,"🛏️",24],["Cama King",2.2,"🛏️",25],["Cama Solteiro",1.1,"🛏️",26],
+    ["Cama Beliche",1.2,"🛏️",null],["Berço",0.3,"👶",28],["Colchão Casal",0.8,"🛌",29],["Colchão Solteiro",0.4,"🛌",30],
+    ["Guarda-Roupa 2 Portas",1.0,"🚪",31],["Guarda-Roupa 4 Portas",2.0,"🚪",32],["Guarda-Roupa 6 Portas",2.5,"🚪",33],
+    ["Cômoda",0.6,"🗄️",34],["Criado-Mudo",0.2,"🛋️",35],["Penteadeira",0.5,"🪞",36],["Sofá-Cama",1.2,"🛋️",37],
+    ["Espelho de Quarto",0.3,"🪞",38],["Armário Multiuso",1.2,"🗄️",39]
   ]},
   { nome:"Cozinha e Área de Serviço", icon:"🍽️", itens:[
-    ["Geladeira Simples",1.0,"❄️"],["Geladeira Duplex",1.2,"❄️"],["Freezer",1.0,"🧊"],["Frigobar",0.5,"🧊"],
-    ["Fogão",0.7,"🔥"],["Máq. de Lavar",0.7,"🧺"],["Secadora",0.6,"🌀"],["Lava-Louças",0.4,"🍽️"],
-    ["Microondas",0.2,"📻"],["Mesa 4 Lugares",0.8,"🍽️"],["Mesa 6 Lugares",1.0,"🍽️"],["Cadeira",0.2,"🪑"],
-    ["Balcão 1m",1.0,"🗄️"],["Ar Condicionado",0.3,"❄️"]
+    ["Geladeira Simples",1.0,"❄️",40],["Geladeira Duplex",1.2,"❄️",41],["Freezer",1.0,"🧊",42],["Frigobar",0.5,"🧊",43],
+    ["Fogão",0.7,"🔥",44],["Máq. de Lavar",0.7,"🧺",45],["Secadora",0.6,"🌀",46],["Lava-Louças",0.4,"🍽️",47],
+    ["Microondas",0.2,"📻",48],["Mesa 4 Lugares",0.8,"🍽️",49],["Mesa 6 Lugares",1.0,"🍽️",50],["Cadeira",0.2,"🪑",51],
+    ["Balcão 1m",1.0,"🗄️",52],["Ar Condicionado",0.3,"❄️",53],
+    ["Bancada de Cozinha",1.5,"🗄️",54],["Mesa de Mármore",1.2,"🟫",55],["Armário de Cozinha",1.0,"🗄️",56]
   ]},
   { nome:"Escritório", icon:"💼", itens:[
-    ["Mesa de Escritório",0.6,"🖥️"],["Escrivaninha Grande",1.3,"🖥️"],["Cadeira de Escritório",0.4,"🪑"],
-    ["Estante de Livros",0.5,"📚"],["Arquivo",0.5,"🗄️"],["Armário de Aço",0.6,"🗄️"],
-    ["Impressora",0.1,"🖨️"],["Cofre",1.0,"🔒"]
+    ["Mesa de Escritório",0.6,"🖥️",57],["Escrivaninha Grande",1.3,"🖥️",58],["Cadeira de Escritório",0.4,"🪑",59],
+    ["Estante de Livros",0.5,"📚",60],["Arquivo",0.5,"🗄️",61],["Armário de Aço",0.6,"🗄️",62],
+    ["Impressora",0.1,"🖨️",63],["Cofre",1.0,"🔒",64]
+  ]},
+  { nome:"Outros", icon:"➕", itens:[
+    ["Escada",0.5,"🪜",null],["Bicicleta",0.3,"🚲",null],["Bicicleta Ergométrica",0.2,"🚲",null],
+    ["Aparelho Musculação",1.0,"💪",null],["Aquário",0.8,"🐟",null],["Piano / Teclado",1.5,"🎹",null],
+    ["Vaso de Planta Grande",0.2,"🪴",null],["Carrinho de Bebê",0.3,"👶",null]
   ]},
   { nome:"Caixas e Volumes", icon:"📦", itens:[
-    ["Caixas Pequenas",0.05,"📦"],["Caixas Médias",0.08,"📦"],["Caixas Grandes",0.12,"📦"],
-    ["Sacolas",0.02,"🛍️"],["Malas de Viagem",0.08,"🧳"],["Bags / Bolsões",0.10,"👜"],
-    ["Itens com Embrulho",0.05,"🖼️"]
+    ["Caixas Pequenas",0.05,"📦",null],["Caixas Médias",0.08,"📦",null],["Caixas Grandes",0.12,"📦",null],
+    ["Sacolas",0.02,"🛍️",null],["Malas de Viagem",0.08,"🧳",null],["Bags / Bolsões",0.10,"👜",null],
+    ["Itens com Embrulho",0.05,"🖼️",null]
   ]}
 ];
 
 const wrap = document.getElementById('accordionWrap');
 let counts = {};
-let imgCounter = 3; /* 1.png=logo, 2.png=banner, itens começam em 3.png */
 categorias.forEach((cat, ci)=>{
-  const semFoto = cat.nome === "Caixas e Volumes";
   const item = document.createElement('div');
   item.className = 'acc-item' + (ci===0?' open':'');
   item.innerHTML = `
@@ -683,9 +819,10 @@ categorias.forEach((cat, ci)=>{
       ${cat.itens.map((it,ii)=>{
         const key = `${ci}_${ii}`;
         counts[key]=0;
-        const thumb = semFoto
-          ? it[2]
-          : `<img src="${imgCounter++}.png" alt="${it[0]}" onerror="this.parentElement.innerHTML='${it[2]}'">`;
+        const imgNum = it[3];
+        const thumb = imgNum
+          ? `<img src="${imgNum}.png" alt="${it[0]}" onerror="this.parentElement.innerHTML='${it[2]}'">`
+          : it[2];
         return `<div class="item-row">
           <div class="item-thumb">${thumb}</div>
           <div class="item-name">${it[0]}<small>${it[1]} m³/un</small></div>
@@ -758,35 +895,73 @@ document.getElementById('quoteForm').addEventListener('submit', function(e){
   const val = id => document.getElementById(id)?.value || '';
   const servico = document.querySelector('input[name=servico]:checked').value;
 
-  let msg = `Olá! Vim pelo site e gostaria de um orçamento.\n\n*Serviço:* ${servico}\n`;
+  const imovelOrig = document.querySelector('input[name=imovelOrigem]:checked')?.value || '-';
+  const acessoOrig = document.querySelector('input[name=acessoOrigem]:checked')?.value || '-';
+  const imovelDest = document.querySelector('input[name=imovelDestino]:checked')?.value || '-';
+  const acessoDest = document.querySelector('input[name=acessoDestino]:checked')?.value || '-';
+  const dataFlexivel = document.querySelector('input[name=dataFlexivel]:checked')?.value || '-';
 
-  msg += `\n*Origem:* ${val('ruaOrigem')}, ${val('numOrigem')} — ${val('bairroOrigem')}, ${val('cidadeOrigem')} - ${val('estadoOrigem')}\n`;
-  msg += `Imóvel: ${document.querySelector('input[name=imovelOrigem]:checked').value}`;
-  if(document.querySelector('input[name=imovelOrigem]:checked').value==='Apartamento'){
-    msg += ` (andar ${val('andarOrigem')}, elevador: ${document.querySelector('input[name=elevadorOrigem]:checked')?.value||'-'})`;
-  }
-  msg += `\n\n*Destino:* ${val('ruaDestino')}, ${val('numDestino')} — ${val('bairroDestino')}, ${val('cidadeDestino')} - ${val('estadoDestino')}\n`;
-  msg += `Imóvel: ${document.querySelector('input[name=imovelDestino]:checked').value}`;
-  if(document.querySelector('input[name=imovelDestino]:checked').value==='Apartamento'){
-    msg += ` (andar ${val('andarDestino')}, elevador: ${document.querySelector('input[name=elevadorDestino]:checked')?.value||'-'})`;
+  let dataMudanca = val('dataMudanca');
+  if(dataMudanca){
+    const [y,m,d] = dataMudanca.split('-');
+    dataMudanca = `${d}/${m}/${y}`;
   }
 
-  msg += `\n\n*Volume estimado:* ${document.getElementById('volumeTotal').textContent}\n*Itens:*\n`;
+  let msg = `*Novo orçamento — Mello's Transportes*\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  msg += `*📋 Informações*\n`;
+  msg += `• *Nome:* ${val('nome')}\n`;
+  msg += `• *E-mail:* ${val('email')}\n`;
+  msg += `• *WhatsApp:* (${val('ddd')}) ${val('numero')}\n`;
+  if(dataMudanca) msg += `• *Data:* ${dataMudanca}\n`;
+  msg += `• *A data é flexível?* ${dataFlexivel}\n`;
+  msg += `• *Serviço:* ${servico}\n\n`;
+
+  msg += `*📍 Origem*\n`;
+  msg += `• *Estado:* ${val('estadoOrigem')}\n`;
+  msg += `• *Cidade:* ${val('cidadeOrigem')}\n`;
+  msg += `• *Bairro:* ${val('bairroOrigem')}\n`;
+  if(val('ruaOrigem')) msg += `• *Rua:* ${val('ruaOrigem')}${val('numOrigem') ? ', '+val('numOrigem') : ''}\n`;
+  msg += `• *Tipo de imóvel:* ${imovelOrig} — ${acessoOrig}`;
+  if(imovelOrig === 'Apartamento' && val('andarOrigem')) msg += ` (${val('andarOrigem')}º andar)`;
+  msg += '\n';
+  if(val('condominioOrigem')) msg += `• *Condomínio:* ${val('condominioOrigem')}\n`;
+
+  msg += `\n*🏁 Destino*\n`;
+  msg += `• *Estado:* ${val('estadoDestino')}\n`;
+  msg += `• *Cidade:* ${val('cidadeDestino')}\n`;
+  msg += `• *Bairro:* ${val('bairroDestino')}\n`;
+  if(val('ruaDestino')) msg += `• *Rua:* ${val('ruaDestino')}${val('numDestino') ? ', '+val('numDestino') : ''}\n`;
+  msg += `• *Tipo de imóvel:* ${imovelDest} — ${acessoDest}`;
+  if(imovelDest === 'Apartamento' && val('andarDestino')) msg += ` (${val('andarDestino')}º andar)`;
+  msg += '\n';
+  if(val('condominioDestino')) msg += `• *Condomínio:* ${val('condominioDestino')}\n`;
+
+  msg += `\n*📦 Itens*\n`;
+  msg += `• *Volume estimado:* ${document.getElementById('volumeTotal').textContent}\n`;
+  let itensLista = [];
   categorias.forEach((cat,ci)=>{
-    let linha = [];
     cat.itens.forEach((it,ii)=>{
       const key = `${ci}_${ii}`;
-      if(counts[key] > 0) linha.push(`${it[0]} x${counts[key]}`);
+      if(counts[key] > 0) itensLista.push(`${it[0]} (x${counts[key]})`);
     });
-    if(linha.length) msg += `- ${cat.nome}: ${linha.join(', ')}\n`;
   });
-  if(extras.length) msg += `- Outros: ${extras.map(e=>e.name+' x'+e.qty).join(', ')}\n`;
+  extras.forEach(e=> itensLista.push(`${e.name} (x${e.qty})`));
+  if(itensLista.length) msg += itensLista.map(i=>`• ${i}`).join('\n') + '\n';
 
-  msg += `\n*Desmontagem/Montagem:* ${document.querySelector('input[name=desmontagem]:checked')?.value||'-'}`;
-  msg += `\n*Embalagem:* ${document.querySelector('input[name=embalagem]:checked')?.value||'-'}\n`;
+  msg += `\n*🔧 Serviços adicionais*\n`;
+  msg += `• *Desmontagem/Montagem:* ${document.querySelector('input[name=desmontagem]:checked')?.value||'-'}\n`;
+  if(val('itensDesmontar')) msg += `• *Itens a desmontar:* ${val('itensDesmontar')}\n`;
+  msg += `• *Embalagem:* ${document.querySelector('input[name=embalagem]:checked')?.value||'-'}\n`;
+  if(val('itensEmbalar')) msg += `• *Itens a embalar:* ${val('itensEmbalar')}\n`;
 
-  msg += `\n*Nome:* ${val('nome')}\n*E-mail:* ${val('email')}\n*WhatsApp:* (${val('ddd')}) ${val('numero')}`;
-  if(val('obs')) msg += `\n*Observações:* ${val('obs')}`;
+  msg += `\n*💰 Pagamento*\n`;
+  msg += `• *Forma de pagamento:* ${document.querySelector('input[name=pagamento]:checked')?.value||'-'}\n`;
+
+  if(val('obs')) msg += `\n*📝 Observações*\n${val('obs')}\n`;
+
+  msg += `\n━━━━━━━━━━━━━━━━━━━━`;
 
   const url = `https://wa.me/5521969891491?text=${encodeURIComponent(msg)}`;
   window.open(url, '_blank');
