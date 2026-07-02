@@ -438,16 +438,16 @@
           </div>
         </div>
       </div>
-      <div class="subbox" id="escadaOrigemBox">
-        <p class="title">🪜 Escada (origem)</p>
+      <div class="field-row">
+        <label class="field-label">Tem escada de acesso?</label>
         <div class="yn-group">
-          <label class="yn-pill"><input type="radio" name="escadaOrigem" value="Sim"> ✅ Tem escada</label>
-          <label class="yn-pill"><input type="radio" name="escadaOrigem" value="Não" checked> ❌ Sem escada</label>
+          <label class="yn-pill"><input type="radio" name="escadaOrigem" value="Sim"> ✅ Sim</label>
+          <label class="yn-pill"><input type="radio" name="escadaOrigem" value="Não" checked> ❌ Não</label>
         </div>
-        <div class="field-row" id="andaresEscadaOrigemRow" style="display:none;margin-top:8px;margin-bottom:0;">
-          <label class="field-label">Quantos andares / lances de escada?</label>
-          <input type="text" placeholder="Ex: 2" id="andaresEscadaOrigem">
-        </div>
+      </div>
+      <div class="subbox" id="escadaOrigemBox" style="display:none;">
+        <p class="title">🪜 Detalhes da escada (origem)</p>
+        <input type="text" placeholder="Ex: 2 lances / 3 andares de escada" id="lancesOrigem">
       </div>
     </div>
 
@@ -488,16 +488,16 @@
           </div>
         </div>
       </div>
-      <div class="subbox" id="escadaDestinoBox">
-        <p class="title">🪜 Escada (destino)</p>
+      <div class="field-row">
+        <label class="field-label">Tem escada de acesso?</label>
         <div class="yn-group">
-          <label class="yn-pill"><input type="radio" name="escadaDestino" value="Sim"> ✅ Tem escada</label>
-          <label class="yn-pill"><input type="radio" name="escadaDestino" value="Não" checked> ❌ Sem escada</label>
+          <label class="yn-pill"><input type="radio" name="escadaDestino" value="Sim"> ✅ Sim</label>
+          <label class="yn-pill"><input type="radio" name="escadaDestino" value="Não" checked> ❌ Não</label>
         </div>
-        <div class="field-row" id="andaresEscadaDestinoRow" style="display:none;margin-top:8px;margin-bottom:0;">
-          <label class="field-label">Quantos andares / lances de escada?</label>
-          <input type="text" placeholder="Ex: 2" id="andaresEscadaDestino">
-        </div>
+      </div>
+      <div class="subbox" id="escadaDestinoBox" style="display:none;">
+        <p class="title">🪜 Detalhes da escada (destino)</p>
+        <input type="text" placeholder="Ex: 2 lances / 3 andares de escada" id="lancesDestino">
       </div>
     </div>
 
@@ -669,16 +669,16 @@ function bindApto(radioName, boxId){
 bindApto('imovelOrigem','apOrigemBox');
 bindApto('imovelDestino','apDestinoBox');
 
-/* ---------- toggle qtd. andares de escada (origem/destino) ---------- */
-function bindEscada(radioName, rowId){
+/* ---------- toggle escada origem/destino (vale pra Casa E Apartamento) ---------- */
+function bindEscada(radioName, boxId){
   document.querySelectorAll(`input[name=${radioName}]`).forEach(r=>{
     r.addEventListener('change', ()=>{
-      document.getElementById(rowId).style.display = r.value==='Sim' && r.checked ? 'block':'none';
+      document.getElementById(boxId).style.display = r.value==='Sim' && r.checked ? 'block':'none';
     });
   });
 }
-bindEscada('escadaOrigem','andaresEscadaOrigemRow');
-bindEscada('escadaDestino','andaresEscadaDestinoRow');
+bindEscada('escadaOrigem','escadaOrigemBox');
+bindEscada('escadaDestino','escadaDestinoBox');
 
 /* ---------- radio pill highlight ---------- */
 function highlightPills(container){
@@ -881,8 +881,8 @@ document.getElementById('quoteForm').addEventListener('submit', function(e){
 
   const imovelOrig = document.querySelector('input[name=imovelOrigem]:checked')?.value || '-';
   const imovelDest = document.querySelector('input[name=imovelDestino]:checked')?.value || '-';
-  const escadaOrig = document.querySelector('input[name=escadaOrigem]:checked')?.value || 'Não';
-  const escadaDest = document.querySelector('input[name=escadaDestino]:checked')?.value || 'Não';
+  const escadaOrig = document.querySelector('input[name=escadaOrigem]:checked')?.value || '-';
+  const escadaDest = document.querySelector('input[name=escadaDestino]:checked')?.value || '-';
 
   let msg = `*Novo orçamento — Mello's Transportes*\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━\n\n`;
@@ -901,7 +901,9 @@ document.getElementById('quoteForm').addEventListener('submit', function(e){
   msg += `• *Tipo de imóvel:* ${imovelOrig}`;
   if(imovelOrig === 'Apartamento' && val('andarOrigem')) msg += ` (${val('andarOrigem')}º andar, elevador: ${document.querySelector('input[name=elevadorOrigem]:checked')?.value||'-'})`;
   msg += '\n';
-  if(escadaOrig === 'Sim') msg += `• *Escada:* Sim${val('andaresEscadaOrigem') ? ' — '+val('andaresEscadaOrigem')+' andar(es)/lance(s)' : ''}\n`;
+  msg += `• *Tem escada?* ${escadaOrig}`;
+  if(escadaOrig === 'Sim' && val('lancesOrigem')) msg += ` — ${val('lancesOrigem')}`;
+  msg += '\n';
 
   msg += `\n*🏁 Destino*\n`;
   msg += `• *Estado:* ${val('estadoDestino')}\n`;
@@ -911,7 +913,9 @@ document.getElementById('quoteForm').addEventListener('submit', function(e){
   msg += `• *Tipo de imóvel:* ${imovelDest}`;
   if(imovelDest === 'Apartamento' && val('andarDestino')) msg += ` (${val('andarDestino')}º andar, elevador: ${document.querySelector('input[name=elevadorDestino]:checked')?.value||'-'})`;
   msg += '\n';
-  if(escadaDest === 'Sim') msg += `• *Escada:* Sim${val('andaresEscadaDestino') ? ' — '+val('andaresEscadaDestino')+' andar(es)/lance(s)' : ''}\n`;
+  msg += `• *Tem escada?* ${escadaDest}`;
+  if(escadaDest === 'Sim' && val('lancesDestino')) msg += ` — ${val('lancesDestino')}`;
+  msg += '\n';
 
   msg += `\n*📦 Itens*\n`;
   msg += `• *Volume estimado:* ${document.getElementById('volumeTotal').textContent}\n`;
