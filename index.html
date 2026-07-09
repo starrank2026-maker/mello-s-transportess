@@ -39,6 +39,7 @@
   button{font-family:inherit;cursor:pointer;}
   img{max-width:100%;display:block;}
 
+  /* ===== Header ===== */
   header{
     background:var(--navy-deep);
     color:#fff;
@@ -75,6 +76,7 @@
     white-space:nowrap;
   }
 
+  /* ===== Hero / signature route (formato foto deitada 16:9) ===== */
   .hero{
     position:relative;
     aspect-ratio:16/9;
@@ -119,6 +121,7 @@
   .hero h1 em{font-style:normal;color:var(--orange);}
   .hero p.lead{margin-top:5px;color:#C9D6E2;font-size:.7rem;max-width:38ch;line-height:1.4;}
 
+  /* the route signature */
   .route{
     margin:10px 0 4px;
     position:relative;
@@ -171,6 +174,7 @@
     white-space:nowrap;flex-shrink:0;
   }
 
+  /* ===== Sections generic ===== */
   .section-band{
     background:var(--orange);
     color:#fff;
@@ -235,6 +239,7 @@
   }
   .subbox p.title{color:var(--orange-deep);font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:10px;}
 
+  /* ---- modal: escolher número WhatsApp ---- */
   #waModalOverlay{
     display:none;position:fixed;inset:0;background:rgba(14,34,56,.72);
     z-index:9999;align-items:center;justify-content:center;padding:20px;
@@ -261,6 +266,7 @@
     color:#8a95a0;font-weight:700;font-size:.85rem;padding:10px 0 2px;cursor:pointer;
   }
 
+  /* Accordion */
   .acc-item{border-bottom:1px solid var(--line);}
   .acc-item:first-child{border-top:1px solid var(--line);}
   .acc-head{
@@ -328,6 +334,7 @@
   }
   .cta-sub{text-align:center;font-size:.7rem;color:var(--ink-soft);margin-top:8px;}
 
+  /* Reviews */
   .reviews{max-width:1100px;margin:0 auto;padding:24px 14px 8px;}
   .reviews .kicker{color:var(--orange-deep);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:.66rem;}
   .reviews h2{font-size:1.2rem;margin-top:5px;margin-bottom:14px;color:var(--navy);}
@@ -345,6 +352,7 @@
   .stars{color:#F2A53E;font-size:.78rem;margin:3px 0 6px;}
   .review-card p{margin:0;font-size:.8rem;color:#3a3f45;font-style:italic;line-height:1.45;}
 
+  /* Footer */
   footer{background:var(--navy-deep);color:#C9D6E2;padding:28px 14px 20px;text-align:center;}
   footer h3{color:#fff;font-size:1.1rem;margin-bottom:5px;}
   footer .tagline{font-size:.76rem;color:#9FB4C8;margin-bottom:14px;}
@@ -354,6 +362,7 @@
   .badge-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:12px;}
   .badge{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);font-size:.62rem;padding:5px 9px;border-radius:999px;}
 
+  /* Float buttons */
   .float-btns{
     position:fixed;
     right:16px;
@@ -376,8 +385,7 @@
     .hero h1{font-size:1.8rem;}
     .header-phone{font-size:.78rem;}
   }
-</style>
-</head>
+</style></head>
 <body>
 
 <header>
@@ -488,7 +496,8 @@
       <div class="two-col field-row">
         <input type="text" placeholder="Ex: Av. das Américas" id="ruaDestino">
         <input type="text" placeholder="Nº" id="numDestino">
-      </div><div class="field-row">
+      </div>
+      <div class="field-row">
         <label class="field-label">Tipo de imóvel</label>
         <div class="radio-group">
           <label class="radio-pill"><input type="radio" name="imovelDestino" value="Casa" checked> 🏠 Casa</label>
@@ -672,9 +681,7 @@
   <a class="float-btn ig" href="https://www.instagram.com/mellostransportes?utm_source=qr&igsh=MXZmM2ZhM2hidHRocg==" target="_blank" rel="noopener" aria-label="Instagram Mello's Transportes">
     <img src="65.jpg" alt="Instagram" onerror="this.parentElement.textContent='📷'">
   </a>
-</div>
-
-<script>
+    </div><script>
 /* ---------- estados ---------- */
 const estados = [
   ["AC","Acre"],["AL","Alagoas"],["AP","Amapá"],["AM","Amazonas"],["BA","Bahia"],
@@ -958,4 +965,38 @@ document.getElementById('quoteForm').addEventListener('submit', function(e){
     });
   });
   extras.forEach(e=> itensLista.push(`${e.name} (x${e.qty})`));
-  if(itensLista.length) ms
+  if(itensLista.length) msg += itensLista.map(i=>`• ${i}`).join('\n') + '\n';
+
+  msg += `\n*🔧 Serviços adicionais*\n`;
+  msg += `• *Desmontagem/Montagem:* ${document.querySelector('input[name=desmontagem]:checked')?.value||'-'}\n`;
+  msg += `• *Embalagem:* ${document.querySelector('input[name=embalagem]:checked')?.value||'-'}\n`;
+
+  if(val('obs')) msg += `\n*📝 Observações*\n${val('obs')}\n`;
+
+  msg += `\n━━━━━━━━━━━━━━━━━━━━`;
+
+  pendingMsg = msg;
+  document.getElementById('waModalOverlay').classList.add('open');
+});
+
+let pendingMsg = '';
+document.querySelectorAll('.wa-option').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const num = btn.getAttribute('data-num');
+    const url = `https://wa.me/${num}?text=${encodeURIComponent(pendingMsg)}`;
+    window.open(url, '_blank');
+    document.getElementById('waModalOverlay').classList.remove('open');
+  });
+});
+document.getElementById('waCancelBtn').addEventListener('click', ()=>{
+  document.getElementById('waModalOverlay').classList.remove('open');
+});
+document.getElementById('waModalOverlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'waModalOverlay') e.currentTarget.classList.remove('open');
+});
+
+recalcVolume();
+</script>
+
+</body>
+</html>
